@@ -3,49 +3,49 @@
 Dice(6)</code></pre><pre class="documenter-example-output">d₆</pre><p>There are some existing dice already defined:</p><pre><code class="language-julia">d4, d6, d8, d10, d12, d20</code></pre><pre class="documenter-example-output">(d₄, d₆, d₈, d₁₀, d₁₂, d₂₀)</pre><p>As expected you can perform some operations with Dices:</p><pre><code class="language-julia">3d6, 2d4 + 2, d4 + d6</code></pre><pre class="documenter-example-output">(3d₆, 2d₄+2, 1d₄+1d₆)</pre><p>And finally, you have one last &quot;Dice&quot; defined:</p><pre><code class="language-julia">coin</code></pre><pre class="documenter-example-output">1d₂-1</pre><p>And naturally you can roll these dices.</p><pre><code class="language-julia">using UnicodePlots
 v = [roll(3d4) for _ = 1:10000]
 UnicodePlots.histogram(v)</code></pre><pre class="documenter-example-output">                ┌                                        ┐ 
-   [ 3.0,  4.0) ┤▇▇▇ 159                                   
-   [ 4.0,  5.0) ┤▇▇▇▇▇▇▇▇ 442                              
-   [ 5.0,  6.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 920                     
-   [ 6.0,  7.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1616        
-   [ 7.0,  8.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1881   
-   [ 8.0,  9.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1841    
-   [ 9.0, 10.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1639       
-   [10.0, 11.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 880                      
-   [11.0, 12.0) ┤▇▇▇▇▇▇▇▇ 458                              
-   [12.0, 13.0) ┤▇▇▇ 164                                   
+   [ 3.0,  4.0) ┤▇▇▇ 139                                   
+   [ 4.0,  5.0) ┤▇▇▇▇▇▇▇▇ 441                              
+   [ 5.0,  6.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 938                     
+   [ 6.0,  7.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1660       
+   [ 7.0,  8.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1862   
+   [ 8.0,  9.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1844   
+   [ 9.0, 10.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1569        
+   [10.0, 11.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 904                     
+   [11.0, 12.0) ┤▇▇▇▇▇▇▇▇▇ 492                             
+   [12.0, 13.0) ┤▇▇▇ 151                                   
                 └                                        ┘ 
                                 Frequency</pre><h2 id="Sum-and-Multiplication"><a class="docs-heading-anchor" href="#Sum-and-Multiplication">Sum and Multiplication</a><a id="Sum-and-Multiplication-1"></a><a class="docs-heading-anchor-permalink" href="#Sum-and-Multiplication" title="Permalink"></a></h2><p>You can sum and multiply dice:</p><pre><code class="language-julia">d6 * d6 + d4 * d8</code></pre><pre class="documenter-example-output">(d₆×d₆)+(d₄×d₈)</pre><h2 id="Drop-and-Keep"><a class="docs-heading-anchor" href="#Drop-and-Keep">Drop and Keep</a><a id="Drop-and-Keep-1"></a><a class="docs-heading-anchor-permalink" href="#Drop-and-Keep" title="Permalink"></a></h2><p>You can easily drop the lowest dice of a roll:</p><pre><code class="language-julia">r = drop(4d6)</code></pre><pre class="documenter-example-output">4d₆ drop lowest 1</pre><pre><code class="language-julia">v = [roll(r) for _ = 1:10000]
 UnicodePlots.histogram(v)</code></pre><pre class="documenter-example-output">                ┌                                        ┐ 
-   [ 3.0,  4.0) ┤ 6                                        
-   [ 4.0,  5.0) ┤▇ 38                                      
-   [ 5.0,  6.0) ┤▇▇ 71                                     
-   [ 6.0,  7.0) ┤▇▇▇▇▇ 183                                 
-   [ 7.0,  8.0) ┤▇▇▇▇▇▇▇ 286                               
-   [ 8.0,  9.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇ 449                          
-   [ 9.0, 10.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 660                     
-   [10.0, 11.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 951             
-   [11.0, 12.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1178       
-   [12.0, 13.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1304   
-   [13.0, 14.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1317   
-   [14.0, 15.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1228     
-   [15.0, 16.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1032          
-   [16.0, 17.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 745                   
-   [17.0, 18.0) ┤▇▇▇▇▇▇▇▇▇▇▇ 410                           
-   [18.0, 19.0) ┤▇▇▇▇ 142                                  
+   [ 3.0,  4.0) ┤ 7                                        
+   [ 4.0,  5.0) ┤▇ 31                                      
+   [ 5.0,  6.0) ┤▇▇ 84                                     
+   [ 6.0,  7.0) ┤▇▇▇▇ 159                                  
+   [ 7.0,  8.0) ┤▇▇▇▇▇▇▇ 279                               
+   [ 8.0,  9.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇ 475                          
+   [ 9.0, 10.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 747                   
+   [10.0, 11.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 931              
+   [11.0, 12.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1141       
+   [12.0, 13.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1239     
+   [13.0, 14.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1308   
+   [14.0, 15.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1224     
+   [15.0, 16.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1026          
+   [16.0, 17.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 752                  
+   [17.0, 18.0) ┤▇▇▇▇▇▇▇▇▇▇▇ 413                           
+   [18.0, 19.0) ┤▇▇▇▇▇ 184                                 
                 └                                        ┘ 
                                 Frequency</pre><p>Drop can also be used with argument <code>kind=:highest</code> to drop the highest roll, and with <code>n=&lt;some number&gt;</code> to drop more than one dice.</p><p>Keep works the same way except that it keeps the highest value by default. It accepts the same arguments.</p><pre><code class="language-julia">r = keep(2d20)</code></pre><pre class="documenter-example-output">2d₂₀ keep highest 1</pre><pre><code class="language-julia">v = [roll(r) for _ = 1:10000]
 UnicodePlots.histogram(v)</code></pre><pre class="documenter-example-output">                ┌                                        ┐ 
-   [ 0.0,  2.0) ┤▇ 29                                      
-   [ 2.0,  4.0) ┤▇▇▇▇ 184                                  
-   [ 4.0,  6.0) ┤▇▇▇▇▇▇▇▇ 405                              
-   [ 6.0,  8.0) ┤▇▇▇▇▇▇▇▇▇▇▇ 591                           
-   [ 8.0, 10.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 769                       
-   [10.0, 12.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1038                 
-   [12.0, 14.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1192              
-   [14.0, 16.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1438         
-   [16.0, 18.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1616      
-   [18.0, 20.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1775   
-   [20.0, 22.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 963                    
+   [ 0.0,  2.0) ┤ 23                                       
+   [ 2.0,  4.0) ┤▇▇▇▇ 212                                  
+   [ 4.0,  6.0) ┤▇▇▇▇▇▇▇ 388                               
+   [ 6.0,  8.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇ 635                          
+   [ 8.0, 10.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 821                      
+   [10.0, 12.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 991                   
+   [12.0, 14.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1197              
+   [14.0, 16.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1423          
+   [16.0, 18.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1590       
+   [18.0, 20.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 1780   
+   [20.0, 22.0) ┤▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 940                    
                 └                                        ┘ 
                                 Frequency</pre><h2 id="Histogram"><a class="docs-heading-anchor" href="#Histogram">Histogram</a><a id="Histogram-1"></a><a class="docs-heading-anchor-permalink" href="#Histogram" title="Permalink"></a></h2><p>Lastly, we define a function <code>histogram</code> that computes all combinations and the histogram of results.</p><pre><code class="language-julia">results, frequency = Dices.histogram(drop(3d4))
 UnicodePlots.barplot(results, frequency)</code></pre><pre class="documenter-example-output">     ┌                                        ┐ 
@@ -65,4 +65,4 @@ UnicodePlots.barplot(results, frequency)</code></pre><pre class="documenter-exam
    6 ┤■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 0.25   
    7 ┤■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 0.234375  
    8 ┤■■■■■■■■■■■■■■■■■■■■■ 0.15625             
-     └                                        ┘ </pre></article><nav class="docs-footer"><a class="docs-footer-nextpage" href="reference/">Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Friday 31 July 2020 16:22">Friday 31 July 2020</span>. Using Julia version 1.4.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+     └                                        ┘ </pre></article><nav class="docs-footer"><a class="docs-footer-nextpage" href="reference/">Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Friday 31 July 2020 18:31">Friday 31 July 2020</span>. Using Julia version 1.4.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
