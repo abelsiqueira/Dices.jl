@@ -1,4 +1,4 @@
-# Dices.jl
+# ~~Dices.jl~~ Moved to [DiceRolls.jl](https://github.com/abelsiqueira/DiceRolls.jl)
 
 _A package for dealing with dices in Julia._
 
